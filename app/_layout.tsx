@@ -5,9 +5,9 @@ import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import { Platform } from "react-native";
 import { ErrorBoundary } from "./error-boundary";
+import { StatusBar } from "expo-status-bar";
 
 export const unstable_settings = {
-  // Ensure that reloading on `/modal` keeps a back button present.
   initialRouteName: "(tabs)",
 };
 
@@ -38,6 +38,7 @@ export default function RootLayout() {
 
   return (
     <ErrorBoundary>
+      <StatusBar style="dark" />
       <RootLayoutNav />
     </ErrorBoundary>
   );
@@ -47,7 +48,29 @@ function RootLayoutNav() {
   return (
     <Stack>
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      <Stack.Screen name="modal" options={{ presentation: "modal" }} />
+      <Stack.Screen 
+        name="shop/[category]/[id]" 
+        options={{ 
+          headerShown: false,
+          presentation: 'card',
+          animation: 'slide_from_right'
+        }} 
+      />
+      <Stack.Screen 
+        name="checkout" 
+        options={{ 
+          headerShown: false,
+          presentation: 'card',
+          animation: 'slide_from_bottom'
+        }} 
+      />
+      <Stack.Screen 
+        name="checkout/success" 
+        options={{ 
+          headerShown: false,
+          presentation: 'transparentModal',
+        }} 
+      />
     </Stack>
   );
 }
